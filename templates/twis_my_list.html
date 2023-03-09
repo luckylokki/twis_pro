@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block container %}
+    <main class="row d-flex justify-content-center align-items-center">
+        <div class="col col-lg-8">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col">
+                    <ol class="list-group list-group">
+                        {% for object in object_list %}
+                        <div class="col">
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">{{ object.username }}</div>
+                                    {% for twis in object.twises %}
+                                        <p class="mb-1">{{ twis.value }}</p>
+                                        <small class="text-muted">Created: {{ twis.date }}</small><br>
+                                        {% if twis.date_update != None %}
+                                            <small class="text-muted">Updated: {{ twis.date_update }}</small>
+                                        {% endif %}
+                                        </div>{% if current_user.username == object.username %}
+                                        <a href="{{ url_for("twis_update", pk=object.pk ) }}"
+                                           class="ms-1 btn btn-outline-primary">Update</a>
+                                        <a href="{{ url_for("twis_delete", pk=object.pk ) }}"
+                                           class="ms-1 btn btn-outline-danger">Delete</a>
+                                    {% endif %}
+                                        </li>
+                                        </div>
+                                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+
+        </div>
+    </main>
+{% endblock %}

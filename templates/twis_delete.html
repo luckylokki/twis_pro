@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Delete Twis| {{ super() }}{% endblock %}
+{% block container %}
+  <main class="row d-flex justify-content-center align-items-center h-20">
+    <div class="col col-lg-8">
+      <form method="post">
+        <div class="mb-3">
+          <p class="text-center">Are you sure you want to delete time message?</p>
+          <p class="text-center fw-bold">
+            <span class="me-1">{{ object.twis_text }}</span>
+          </p>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="{{ url_for("twis_list") }}" class="btn btn-lg btn-block btn-secondary">Cancel</a>
+          <button class="ms-3 btn btn-lg btn-block btn-danger">Delete</button>
+        </div>
+      </form>
+
+    </div>
+  </main>
+{% endblock %}
