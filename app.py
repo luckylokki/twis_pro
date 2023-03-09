@@ -10,7 +10,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
 
-with open('..env_db') as infile:
+with open('.env_db') as infile:
     en = [data.partition("=")[2] for data in list(infile.read().splitlines())]
 db_conf = f"{en[0]}://{en[1]}:{en[2]}@{en[3]}"
 
