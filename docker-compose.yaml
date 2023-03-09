@@ -5,9 +5,21 @@
 version: "3.5"
 
 services:
-  postgres:
-    container_name: python-training-postgres
-    image: postgres
+  app_flask: 
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    ports:
+      - "5001:5000"
+    depends_on:
+      - "postgres-db"
+    networks:
+      - postgres
+
+  postgres-db:
+    container_name: postgres-db
+    image: postgres:alpine
     restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
@@ -19,20 +31,6 @@ services:
     networks:
       - postgres
 
-  pgadmin4:
-    container_name: python-training-pgadmin4
-    image: dpage/pgadmin4
-    restart: unless-stopped
-    environment:
-      PGADMIN_DEFAULT_EMAIL: pgadmin@pgadmin.org
-      PGADMIN_DEFAULT_PASSWORD: pgadmin
-      PGADMIN_CONFIG_SERVER_MODE: "False"
-    volumes:
-      - pgadmin4:/var/lib/pgadmin
-    ports:
-      - "5002:80"
-    networks:
-      - postgres
 
 networks:
   postgres:
