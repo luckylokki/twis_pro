@@ -56,4 +56,4 @@ You need to set environment variables for database:
     PRODUCTION_DATABASE_URI_URI=postgresql://user:password@localhost/
     SECRET_KEY=your_secret_key
 
-You can find DB user,password and host from docker-compose.yaml.
+You can find DB user,password and host from docker-compose.yaml
