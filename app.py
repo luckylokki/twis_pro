@@ -1,4 +1,5 @@
 import datetime
+import os
 
 from flask_wtf import FlaskForm
 from sqlalchemy import desc
@@ -10,12 +11,8 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
 
-with open('.env_db') as infile:
-    en = [data.partition("=")[2] for data in list(infile.read().splitlines())]
-db_conf = f"{en[0]}://{en[1]}:{en[2]}@{en[3]}"
-
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = db_conf
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://" + os.environ.get('DB_USER') + ":" + os.environ.get('DB_PASSWORD') + "@" + os.environ.get('DB_HOST')
 app.config["SECRET_KEY"] = "MYSECRETKEY"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
