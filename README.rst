@@ -54,7 +54,7 @@ You need to set environment variables for database:
 
     FLASK_DEBUG=0 (or 1 for debugging mode)
     DEVELOPMENT_DATABASE_URI=postgresql://user:password@localhost/
-    PRODUCTION_DATABASE_URI_URI=postgresql://user:password@localhost/
+    PRODUCTION_DATABASE_URI=postgresql://user:password@localhost/
     SECRET_KEY=your_secret_key
 
 You can find DB user,password and host from docker-compose.yaml
