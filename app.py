@@ -21,7 +21,7 @@ bcrypt = Bcrypt(app)
 
 login_manager = LoginManager(app)
 
-
+#test
 @login_manager.user_loader
 def load_user(user_id):
     return UserModel.query.get(int(user_id))
