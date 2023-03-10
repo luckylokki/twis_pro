@@ -26,6 +26,13 @@ Aditionaly you need to start `docker-compose`_ containers with `postgres`_ datab
 .. code-block::
 
     docker-compose up -d
+
+To install the requirements use one of the commands below:
+
+.. code-block::
+
+    pip install -r requirements.txt
+
 After docker starts:
 
 
@@ -34,12 +41,6 @@ After docker starts:
     flask db init
     flask db migrate -m "first start"
     flask db upgrade
-
-To install the requirements use one of the commands below:
-
-.. code-block::
-
-    pip install -r requirements.txt
 
 .. _postgres: https://www.postgresql.org/docs/
 .. _docker-compose: https://docs.docker.com/compose/
