@@ -12,7 +12,8 @@ from flask_sqlalchemy import SQLAlchemy
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://" + os.environ.get('DB_USER') + ":" + os.environ.get('DB_PASSWORD') + "@" + os.environ.get('DB_HOST')
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://" + os.environ.get('DB_USER') + ":" \
+                                        + os.environ.get('DB_PASSWORD') + "@" + os.environ.get('DB_HOST')
 app.config["SECRET_KEY"] = "MYSECRETKEY"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
