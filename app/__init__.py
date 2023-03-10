@@ -3,10 +3,13 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from app.config import DevelopementConfig
-
+from app.config import DevelopmentConfig, ProductionConfig
+import os
 app = Flask(__name__)
-app.config.from_object(DevelopementConfig)
+if os.environ.get('FLASK_DEBUG') == '1':
+    app.config.from_object(DevelopmentConfig)
+else:
+    app.config.from_object(ProductionConfig)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 bcrypt = Bcrypt(app)
