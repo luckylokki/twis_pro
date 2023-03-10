@@ -1,6 +1,5 @@
 import datetime
 import os
-#develop
 from flask_wtf import FlaskForm
 from sqlalchemy import desc
 from wtforms import StringField, PasswordField, EmailField, SubmitField, BooleanField, TextAreaField
@@ -279,4 +278,4 @@ def twis_delete(pk: int):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run()
