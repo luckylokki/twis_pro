@@ -16,9 +16,9 @@
                                         <small class="text-muted">Updated: {{ object.date_update }}</small>
                                     {% endif %}
                                 </div>{% if current_user.username == object.user_name %}
-                                <a href="{{ url_for("twis_update", pk=object.pk ) }}"
+                                <a href="{{ url_for("main.twis_update", pk=object.pk ) }}"
                                    class="ms-1 btn btn-outline-primary">Update</a>
-                                <a href="{{ url_for("twis_delete", pk=object.pk ) }}"
+                                <a href="{{ url_for("main.twis_delete", pk=object.pk ) }}"
                                    class="ms-1 btn btn-outline-danger">Delete</a>
                             {% endif %}
                             </li>
