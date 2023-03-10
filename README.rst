@@ -47,12 +47,12 @@ To install the requirements use one of the commands below:
 
 Environment variables
 =====================
-You need to init enviroment variables for database:
+You need to set environment variables for database:
 
 .. code-block::
 
-    export DB_USER=<YOUR_DB_USERNAME>
-    export DB_PASSWORD=<YOUR_DB_PASSWORD>
-    export DB_HOST=<YOUR_DB_HOST>
+    DB_USER=<YOUR_DB_USERNAME>
+    DB_PASSWORD=<YOUR_DB_PASSWORD>
+    DB_HOST=<YOUR_DB_HOST>
 
 You can find DB user,password and host from docker-compose.yaml.
