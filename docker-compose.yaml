@@ -1,22 +1,10 @@
 # Docker compose config
 #
-# Included services: postgres, pgadmin4
+# Included services: postgres, flask_app
 
 version: "3.5"
 
 services:
-  app_flask: 
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: app
-    ports:
-      - "5001:5000"
-    depends_on:
-      - "postgres-db"
-    networks:
-      - postgres
-
   postgres-db:
     container_name: postgres-db
     image: postgres:alpine
@@ -31,6 +19,21 @@ services:
     networks:
       - postgres
 
+  app_flask: 
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    environment:
+      DEVELOPMENT_DATABASE_URI: postgresql://postgres:postgres@postgres-db/
+      PRODUCTION_DATABASE_URI: postgresql://postgres:postgres@postgres-db/
+      FLASK_DEBUG: 1
+    ports:
+      - "5001:5000"
+    depends_on:
+      - "postgres-db"
+    networks:
+      - postgres
 
 networks:
   postgres:
