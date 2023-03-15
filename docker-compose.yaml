@@ -19,11 +19,11 @@ services:
     networks:
       - postgres
 
-  twis_flask:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: twisapp
+    container_name: app_flask
     environment:
       DEVELOPMENT_DATABASE_URI: postgresql://postgres:postgres@postgres-db/
       PRODUCTION_DATABASE_URI: postgresql://postgres:postgres@postgres-db/
