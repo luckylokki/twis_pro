@@ -36,7 +36,7 @@ services:
       - postgres-dev
 
 networks:
-  postgres:
+  postgres-dev:
     driver: bridge
 
 volumes:
