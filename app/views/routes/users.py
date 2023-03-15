@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash, Blueprint
 from flask_login import login_user, logout_user, login_required
 from app.forms import SignUpForm, SignInForm
-from app.models import UserModel
+from app.models import UserModel, get_current_timestamp
 from app import db
 
 users = Blueprint('users', __name__)
@@ -16,6 +16,7 @@ def signup():
         db.session.add(
             UserModel(
                 username=form.username.data.strip(),
+                date_create=get_current_timestamp().replace(microsecond=0).isoformat(' '),
                 email=form.email.data.strip(),
                 first_name=form.first_name.data,
                 last_name=form.last_name.data,

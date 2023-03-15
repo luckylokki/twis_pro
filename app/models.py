@@ -10,7 +10,7 @@ def load_user(user_id):
 
 def get_current_timestamp() -> datetime.datetime:
     """GetDate time implementation"""
-    return datetime.datetime.now()
+    return datetime.datetime.utcnow()
 
 
 class UserModel(db.Model, UserMixin):
@@ -23,6 +23,7 @@ class UserModel(db.Model, UserMixin):
     password = db.Column(db.String(255), nullable=False)
     first_name = db.Column(db.String(64), default="")
     last_name = db.Column(db.String(64), default="")
+    date_create = db.Column(db.DateTime, nullable=False, default=get_current_timestamp().replace(microsecond=0).isoformat(' '))
     twises = db.relationship("TwisModel", backref="userid", cascade="all,delete,delete-orphan", single_parent=True,
                              order_by="desc(TwisModel.date)")
 
