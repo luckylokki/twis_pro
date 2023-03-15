@@ -25,8 +25,8 @@ services:
       dockerfile: Dockerfile
     container_name: app-dev
     environment:
-      DEVELOPMENT_DATABASE_URI: postgresql://postgres:postgres@postgres-db-dev:5433/
-      PRODUCTION_DATABASE_URI: postgresql://postgres:postgres@postgres-db-dev:5433/
+      DEVELOPMENT_DATABASE_URI: postgresql://postgres:postgres@postgres-db-dev/
+      PRODUCTION_DATABASE_URI: postgresql://postgres:postgres@postgres-db-dev/
       FLASK_DEBUG: 1
     ports:
       - "5002:5000"
