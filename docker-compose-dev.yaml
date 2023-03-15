@@ -1,0 +1,43 @@
+# Docker compose config
+#
+# Included services: postgres, flask_app
+
+version: "3.5"
+
+services:
+  postgres-db-dev:
+    container_name: postgres-db-dev
+    image: postgres:alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - twis_data_dev:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres-dev
+
+  app_flask_dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app-dev
+    environment:
+      DEVELOPMENT_DATABASE_URI: postgresql://postgres:postgres@postgres-db-dev/
+      PRODUCTION_DATABASE_URI: postgresql://postgres:postgres@postgres-db-dev/
+      FLASK_DEBUG: 1
+    ports:
+      - "5002:5000"
+    depends_on:
+      - "postgres-db-dev"
+    networks:
+      - postgres-dev
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  twis_data_dev:
