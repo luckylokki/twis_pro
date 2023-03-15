@@ -19,19 +19,35 @@ services:
     networks:
       - postgres-dev
 
-  app_flask_dev:
+  atwis_app_dev:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app-dev
+    container_name: de-vtwisapp
     environment:
       DEVELOPMENT_DATABASE_URI: postgresql://postgres:postgres@postgres-db-dev/
       PRODUCTION_DATABASE_URI: postgresql://postgres:postgres@postgres-db-dev/
       FLASK_DEBUG: 1
+    volumes:
+      - ./migrations:/usr/src/app/migrations
     ports:
       - "5002:5000"
     depends_on:
       - "postgres-db-dev"
+    networks:
+      - postgres-dev
+  pgadmin4:
+    container_name: python-training-pgadmin4
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: pgadmin
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - pgadmin4:/var/lib/pgadmin
+    ports:
+      - "5021:80"
     networks:
       - postgres-dev
 
@@ -41,3 +57,5 @@ networks:
 
 volumes:
   twis_data_dev:
+  dev_migrations:
+  pgadmin4:

@@ -19,15 +19,17 @@ services:
     networks:
       - postgres
 
-  app_flask: 
+  twis_flask:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app
+    container_name: twisapp
     environment:
       DEVELOPMENT_DATABASE_URI: postgresql://postgres:postgres@postgres-db/
       PRODUCTION_DATABASE_URI: postgresql://postgres:postgres@postgres-db/
       FLASK_DEBUG: 0
+    volumes:
+      - ./migrations:/usr/src/app/migrations
     ports:
       - "5001:5000"
     depends_on:
@@ -41,4 +43,4 @@ networks:
 
 volumes:
   twis_data:
-  pgadmin4:
+  migrations:
