@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block container %}
+    <main class="row d-flex justify-content-center align-items-center">
+        <div class="col col-lg-4">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col">
+                    <ol class="list-group list-group">
+                        <div class="col">
+                            <div class="card bg-light mb-3" style="max-width: 18rem;">
+                                <div class="card-header fw-bold"><h5>Profile: {{ current_user }}</h5></div>
+                                <div class="card-body">
+                                    <p class="card-text"><span class="fw-bold">Username: </span>{{ current_user.username }}</p>
+                                    <p class="card-text"><span class="fw-bold">Name: </span>{{ current_user.first_name }}</p>
+                                    <p class="card-text"><span class="fw-bold">Surname: </span>{{ current_user.last_name }}</p>
+                                    <p class="card-text"><span class="fw-bold">email: </span>{{ current_user.email }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </ol>
+                </div>
+            </div>
+
+        </div>
+    </main>
+{% endblock %}

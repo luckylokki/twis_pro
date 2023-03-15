@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for, flash, Blueprint
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 from app.forms import SignUpForm, SignInForm
 from app.models import UserModel
 from app import db
@@ -15,8 +15,8 @@ def signup():
     if form.validate_on_submit():
         db.session.add(
             UserModel(
-                username=form.username.data,
-                email=form.email.data,
+                username=form.username.data.strip(),
+                email=form.email.data.strip(),
                 first_name=form.first_name.data,
                 last_name=form.last_name.data,
                 password=UserModel.generate_hashed_password(form.password.data)
@@ -34,7 +34,7 @@ def signin():
 
     form = SignInForm()
     if form.validate_on_submit():
-        user = UserModel.query.filter_by(username=form.username.data).first()
+        user = UserModel.query.filter_by(username=form.username.data.strip()).first()
         if user is not None and user.check_password(form.password.data):
             login_user(user, remember=True)
 
@@ -54,3 +54,9 @@ def logout():
     redirect_to = url_for("users.signin")
 
     return redirect(redirect_to)
+
+@users.route("/profile")
+@login_required
+def profile():
+    """User profile view route"""
+    return render_template("profile.html")
