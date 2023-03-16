@@ -23,7 +23,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app_flask
+    container_name: app
     environment:
       DEVELOPMENT_DATABASE_URI: postgresql://postgres:postgres@postgres-db/
       PRODUCTION_DATABASE_URI: postgresql://postgres:postgres@postgres-db/
