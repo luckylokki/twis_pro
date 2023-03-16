@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, EmailField, SubmitField, BooleanField, TextAreaField
-from wtforms.validators import DataRequired, EqualTo, Length, ValidationError
+from wtforms.validators import DataRequired, EqualTo, Length, ValidationError, Email, Regexp
 
 from app.models import UserModel
 
@@ -8,12 +8,12 @@ from app.models import UserModel
 class SignUpForm(FlaskForm):
     """New user form"""
 
-    username = StringField("Username", [DataRequired(), Length(max=128)])
+    username = StringField("Username", [DataRequired(), Length(max=128),Regexp('^\w+$', message="Username must contain only letters numbers or underscore")])
     password = PasswordField("Password", [DataRequired(), Length(max=128)])
     confirm_password = PasswordField(
         "Confirm Password", validators=[DataRequired(), EqualTo("password")]
     )
-    email = EmailField("Email", [DataRequired()])
+    email = EmailField("Email", [DataRequired(), Email()])
     first_name = StringField("First Name", [Length(max=64)])
     last_name = StringField("Last Name", [Length(max=64)])
 

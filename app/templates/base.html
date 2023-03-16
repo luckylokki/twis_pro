@@ -8,10 +8,21 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <title>{% block title %}My Twis App</title>{% endblock %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>{% block title %}My Twis App{% endblock %}</title>
+    <style type="text/css">
+        #cb-cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            border-radius: 0;
+            display: none;
+        }
+    </style>
 </head>
 <body>
 {% include "_navbar.html" %}
@@ -19,11 +30,54 @@
 {% include "_messages.html" %}
 <div class="container mt-3">
     <div class="vh-100">
+
+        <!-- Cookie Banner -->
+        <div id="cb-cookie-banner" class="alert alert-dark text-center mb-0" role="alert">
+            🍪 This website uses cookies to ensure you get the best experience on our website.
+            <a href="https://www.cookiesandyou.com/" target="blank">Learn more</a>
+            <button type="button" class="btn btn-primary btn-sm ms-3" onclick="window.cb_hideCookieBanner()">
+                I Got It
+            </button>
+        </div>
+        <!-- End of Cookie Banner -->
+
         {% block container %}{% endblock %}
     </div>
 </div>
 
-<!-- Optional JavaScript; choose one of the two! -->
+<!-- Optional JavaScript; Cookie usage -->
+<script>
+    /* Javascript to show and hide cookie banner using localstorage */
+    /* Shows the Cookie banner */
+    function showCookieBanner() {
+        let cookieBanner = document.getElementById("cb-cookie-banner");
+        cookieBanner.style.display = "block";
+    }
+
+    /* Hides the Cookie banner and saves the value to localstorage */
+    function hideCookieBanner() {
+        localStorage.setItem("cb_isCookieAccepted", "yes");
+        let cookieBanner = document.getElementById("cb-cookie-banner");
+        cookieBanner.style.display = "none";
+    }
+
+    /* Checks the localstorage and shows Cookie banner based on it. */
+    function initializeCookieBanner() {
+        let isCookieAccepted = localStorage.getItem("cb_isCookieAccepted");
+        if (isCookieAccepted === null) {
+            localStorage.setItem("cb_isCookieAccepted", "no");
+            showCookieBanner();
+        }
+        if (isCookieAccepted === "no") {
+            showCookieBanner();
+        }
+    }
+
+    // Assigning values to window object
+    window.onload = initializeCookieBanner();
+    window.cb_hideCookieBanner = hideCookieBanner;
+</script>
+<!-- END -Cookie usage script-->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

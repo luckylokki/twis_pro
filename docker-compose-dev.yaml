@@ -19,15 +19,17 @@ services:
     networks:
       - postgres-dev
 
-  app_flask_dev:
+  app_dev:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app-dev
+    container_name: app_flask
     environment:
-      DEVELOPMENT_DATABASE_URI: postgresql://postgres:postgres@postgres-db-dev:5433/
-      PRODUCTION_DATABASE_URI: postgresql://postgres:postgres@postgres-db-dev:5433/
+      DEVELOPMENT_DATABASE_URI: postgresql://postgres:postgres@postgres-db-dev/
+      PRODUCTION_DATABASE_URI: postgresql://postgres:postgres@postgres-db-dev/
       FLASK_DEBUG: 1
+    volumes:
+      - ./migrations:/usr/src/app/migrations
     ports:
       - "5002:5000"
     depends_on:
@@ -41,3 +43,4 @@ networks:
 
 volumes:
   twis_data_dev:
+  dev_migrations:
