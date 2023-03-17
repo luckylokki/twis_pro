@@ -20,6 +20,3 @@ class DevelopmentConfig(BaseConfig):
 
 class ProductionConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.environ.get('PRODUCTION_DATABASE_URI')
-
-class TestConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
