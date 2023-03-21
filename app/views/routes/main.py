@@ -25,6 +25,7 @@ def twis_my_list():
     """List all current user messages route"""
     if current_user.is_authenticated:
         object_list = current_user.twises
+        flash("Welcome to twis", "success")
     else:
         return redirect(url_for("users.signin"))
 

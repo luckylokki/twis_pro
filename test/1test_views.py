@@ -1,11 +1,12 @@
 from app import app
+from app.config import TestConfig
 from app.models import UserModel
 import pytest
 
 
 @pytest.fixture(scope='module')
 def new_user():
-    user = UserModel('patkennedy79@gmail.com', 'FlaskIsAwesome')
+    user = UserModel('admin', 'admin')
     return user
 
 class TestViews:
@@ -14,7 +15,13 @@ class TestViews:
     def setup_method(self):
         #print('Я выполняюсь перед каждый тестом')
         # app.testing = True
+
+        self.client = app.config.from_object(TestConfig)
         self.client = app.test_client()
+
+    def teardown_method(self):
+        #print('А я после каждого теста')
+        pass
 
     def test_home(self):
         response = self.client.get('/')
@@ -24,14 +31,14 @@ class TestViews:
         # 4. Проверка как работают формы
         assert response.status_code == 302
 
-    def test_home_page_post_with_fixture(new_user):
+    def test_home_page_post_with_fixture(self):
         """
         GIVEN a Flask application
-        WHEN the '/' page is is posted to (POST)
-        THEN check that a '405' status code is returned
+        WHEN the '/' page is posted to (POST)
         """
-        response = new_user.post('/')
-        assert response.status_code == 405
+        # response = new_user.client.post('/signin/')
+        response = self.client.post('/signin/', data=dict(username='asdasdg', password='asdasd'))
+        assert response.status_code == 200
     def test_signin(self):
         response = self.client.get('/signin/')
         assert response.status_code == 200
@@ -39,7 +46,5 @@ class TestViews:
         response = self.client.get('/signup/')
         assert response.status_code == 200
 
-    def teardown_method(self):
-        #print('А я после каждого теста')
-        pass
+
 
