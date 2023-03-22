@@ -20,7 +20,7 @@ class TestSignIn:
     def test_successful_signin(self, test_client):
         # Создаем сессию и добавляем пользователя в базу данных
         session = Session()
-        user = UserModel(username='admin', password='admin')
+        user = UserModel(username='testuser', password='testpassword')
         # session.add(user)
         session.commit()
 
@@ -38,7 +38,7 @@ class TestSignIn:
     def test_unsuccessful_signin(self, test_client):
         # Создаем сессию и добавляем пользователя в базу данных
         session = Session()
-        user = UserModel(username='testuser', password='testpassword')
+        user = UserModel(username='testuser', password='wrongpassword')
         session.add(user)
         session.commit()
 

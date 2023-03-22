@@ -10,6 +10,8 @@ db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
 login_manager.login_view = 'users.signin'
+
+
 def create_app():
     app = Flask(__name__)
     if os.environ.get('FLASK_DEBUG') == '1':
@@ -20,7 +22,6 @@ def create_app():
     migrate = Migrate(app, db)
     login_manager.init_app(app)
     bcrypt.init_app(app)
-
 
     from app.views.routes.main import main
     from app.views.routes.users import users
