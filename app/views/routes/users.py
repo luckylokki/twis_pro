@@ -38,12 +38,10 @@ def signin():
         user = UserModel.query.filter_by(username=form.username.data.strip()).first()
         if user is not None and user.check_password(form.password.data):
             login_user(user, remember=True)
-
-            return redirect(url_for("main.twis_list"))
-
+            flash("Welcome to your twis list", "success")
+            return redirect(url_for("main.twis_my_list"))
         else:
-            flash("Incorrect username or password. Please check.", "danger")
-
+            flash("Invalid username or password. Please check.", "danger")
     return render_template("signin.html", form=form)
 
 
