@@ -26,7 +26,7 @@ services:
     container_name: app
     environment:
       DEVELOPMENT_DATABASE_URI: postgresql://postgres:postgres@postgres-db/
-      PRODUCTION_DATABASE_URI: postgresql://postgres:postgres@postgres-db/
+      PRODUCTION_DATABASE_URI: postgresql://postgres:postadmin@postgres-db/
       FLASK_DEBUG: 0
     volumes:
       - ./migrations:/usr/src/app/migrations
