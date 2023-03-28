@@ -11,11 +11,11 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: postadmin
     volumes:
       - twis_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5435:5432"
     networks:
       - postgres
 
@@ -26,7 +26,7 @@ services:
     container_name: app
     environment:
       DEVELOPMENT_DATABASE_URI: postgresql://postgres:postgres@postgres-db/
-      PRODUCTION_DATABASE_URI: postgresql://postgres:postgres@postgres-db/
+      PRODUCTION_DATABASE_URI: postgresql://postgres:postadmin@postgres-db/
       FLASK_DEBUG: 0
     volumes:
       - ./migrations:/usr/src/app/migrations
