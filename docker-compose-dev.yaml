@@ -43,4 +43,3 @@ networks:
 
 volumes:
   twis_data_dev:
-  dev_migrations:
