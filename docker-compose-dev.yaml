@@ -42,4 +42,4 @@ networks:
     driver: bridge
 
 volumes:
-  twis_data:
+  twis_data_dev:
