@@ -23,7 +23,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app
+    container_name: prod_twiss
     environment:
       DEVELOPMENT_DATABASE_URI: postgresql://postgres:postdev@postgres-db/
       PRODUCTION_DATABASE_URI: postgresql://postgres:postadmin@postgres-db/
