@@ -25,7 +25,7 @@ services:
       dockerfile: Dockerfile
     container_name: app
     environment:
-      DEVELOPMENT_DATABASE_URI: postgresql://postgres:postgres@postgres-db/
+      DEVELOPMENT_DATABASE_URI: postgresql://postgres:postdev@postgres-db/
       PRODUCTION_DATABASE_URI: postgresql://postgres:postadmin@postgres-db/
       FLASK_DEBUG: 0
     volumes:
